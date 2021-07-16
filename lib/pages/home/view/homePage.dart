@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scooter_pugachev/pages/register/view/registerForm.dart';
+import 'package:scooter_pugachev/pages/register/view/registerPage.dart';
 
 import 'homeForm.dart';
 
@@ -11,8 +13,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
-      body: HomeForm(),
+      backgroundColor: Colors.white,
+      body: (false) ? HomeForm() : RegPage(),
     );
   }
 }

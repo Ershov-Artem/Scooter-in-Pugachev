@@ -35,6 +35,8 @@ dependencies:
   latlng: ^0.1.0
   qr_code_scanner: ^0.5.1
   google_fonts: ^2.1.0
+  flutter_multi_formatter: ^1.0.3
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:

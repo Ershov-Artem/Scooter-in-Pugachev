@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: TextTheme(
-          button: GoogleFonts.lato(fontSize: 17, color: Colors.white),
-          bodyText1: GoogleFonts.lato(fontSize: 22, color: Colors.white),
-          headline1: GoogleFonts.lato(color: Colors.white, fontSize: 20),
+          button: GoogleFonts.lato(fontSize: 17),
+          bodyText1: GoogleFonts.lato(fontSize: 17, color: Colors.blueAccent),
+          headline1: GoogleFonts.lato(color: Colors.white, fontSize: 22),
         ),
       ),
       home: HomePage(),

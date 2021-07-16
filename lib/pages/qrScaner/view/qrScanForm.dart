@@ -36,7 +36,7 @@ class _QRScanFormState extends State<QRScanForm> {
             child: Center(
                 child: Text(
               "Отсканируйте код с самоката",
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.headline1,
             ))),
         Container(
             padding: EdgeInsets.only(top: 140, left: 20),
