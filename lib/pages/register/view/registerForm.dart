@@ -91,12 +91,6 @@ class _RegFormState extends State<RegForm> {
                                             print(_controller.text);
                                             _phoneNumber = newValue;
                                           },
-                                          onSaved: (newValue) =>
-                                              _phoneNumber = newValue,
-                                          validator: (val) => !(val.length ==
-                                                  15)
-                                              ? 'Введите корректный номер телефона'
-                                              : null,
                                           inputFormatters: [
                                             MaskedInputFormater(
                                                 "(000) 000-00-00")
@@ -108,13 +102,15 @@ class _RegFormState extends State<RegForm> {
                   ),
                   RegButton(
                       onTap: () async {
+                        _phoneNumber = _phoneNumber.replaceAll('(', '');
+                        _phoneNumber = _phoneNumber.replaceAll(')', '');
+                        _phoneNumber = _phoneNumber.replaceAll('-', '');
+                        _phoneNumber = _phoneNumber.replaceAll(' ', '');
+                        _phoneNumber = "${7}${_phoneNumber}";
+                        print(_phoneNumber);
                         final form = formKey.currentState;
-                        if (form.validate()) {
-                          form.save();
-                          print("че-то отправилось");
-                          _response =
-                              await _bloc.regUser(_phoneNumber, "НахуйИмя");
-                        }
+                        _response =
+                            await _bloc.regUser(_phoneNumber, "НахуйИмя");
                       },
                       height: 55,
                       width: 230,
@@ -125,34 +121,42 @@ class _RegFormState extends State<RegForm> {
                 ],
               ));
         } else if (state == UserStatus.loading) {
-          return Container(
+          return Align(
+              alignment: Alignment.center,
               child: Column(
-            children: [
-              Text(
-                "Подождите, загрузка",
-                style: Theme.of(context).textTheme.bodyText1,
-                textAlign: TextAlign.center,
-              ),
-              CircularProgressIndicator(
-                backgroundColor: Color(0xff8ebbff),
-              )
-            ],
-          ));
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Подождите, загрузка",
+                    style: Theme.of(context).textTheme.bodyText1,
+                    textAlign: TextAlign.center,
+                  ),
+                  CircularProgressIndicator(
+                    backgroundColor: Color(0xff8ebbff),
+                  )
+                ],
+              ));
         } else if (state == UserStatus.ok) {
-          return Container();
+          return Align(
+              alignment: Alignment.center,
+              child: Container(child: Text("Получилось походу")));
         } else {
           return Container(
-              child: Column(children: [
-            Text("Произошла ошибка ${_response.error}"),
-            RegButton(
-                onTap: () => Navigator.pushNamed(context, '/reg'),
-                height: 55,
-                width: 230,
-                text: "Попробовать снова",
-                decoration: BoxDecoration(
-                    color: Color(0xff8ebbff),
-                    borderRadius: BorderRadius.circular(10)))
-          ]));
+              child: Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Произошла ошибка ${_response.error}"),
+                        RegButton(
+                            onTap: () => Navigator.pushNamed(context, '/reg'),
+                            height: 55,
+                            width: 230,
+                            text: "Попробовать снова",
+                            decoration: BoxDecoration(
+                                color: Color(0xff8ebbff),
+                                borderRadius: BorderRadius.circular(10)))
+                      ])));
         }
       });
 }
