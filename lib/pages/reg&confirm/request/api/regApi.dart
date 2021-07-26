@@ -31,4 +31,26 @@ class UserApiProvider {
       return PostUserResponse.withError("$error", 0);
     }
   }
+
+  Future<ConfirmCodeResponse> confUser(int _confirmCode) async {
+    var params = {
+      "code": _confirmCode,
+    };
+    final String url = "user/confirm";
+    try {
+      Response response = await _dio.post(url,
+          data: json.encode(params),
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          }));
+      if (response.statusCode == 200)
+        return ConfirmCodeResponse(response.data, response.statusCode);
+      else
+        return ConfirmCodeResponse.withError(
+            response.data, response.statusCode);
+    } catch (error, stackTrace) {
+      return ConfirmCodeResponse.withError("$error", 0);
+    }
+  }
 }

@@ -23,6 +23,18 @@ class PostUserBloc extends Cubit<UserStatus> {
     _subject.sink.add(response);
   }
 
+  confUser(_confirmCode) async {
+    emit(UserStatus.loading);
+    ConfirmCodeResponse response = await _repository.confUser(_confirmCode);
+    if (response.statuscode == 200)
+      emit(UserStatus.ok);
+    else {
+      print(response.body);
+      emit(UserStatus.error);
+    }
+    _subject.sink.add(response);
+  }
+
   dispose() {
     _subject.close();
   }

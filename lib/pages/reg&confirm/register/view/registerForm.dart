@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:scooter_pugachev/pages/reg&confirm/regConfirm/confirm.dart';
+import 'package:scooter_pugachev/pages/reg&confirm/request/cubit/cubit.dart';
+import 'package:scooter_pugachev/pages/reg&confirm/request/entities/entities.dart';
 
-import '../cubit/cubit.dart';
 import '../widgets/regButton.dart';
-import '../entities/entities.dart';
 
 class RegForm extends StatefulWidget {
   @override
@@ -108,7 +109,6 @@ class _RegFormState extends State<RegForm> {
                         _phoneNumber = _phoneNumber.replaceAll(' ', '');
                         _phoneNumber = "${7}${_phoneNumber}";
                         print(_phoneNumber);
-                        final form = formKey.currentState;
                         _response =
                             await _bloc.regUser(_phoneNumber, "НахуйИмя");
                       },
@@ -137,9 +137,7 @@ class _RegFormState extends State<RegForm> {
                 ],
               ));
         } else if (state == UserStatus.ok) {
-          return Align(
-              alignment: Alignment.center,
-              child: Container(child: Text("Получилось походу")));
+          return ConfirmPage();
         } else {
           return Container(
               child: Align(

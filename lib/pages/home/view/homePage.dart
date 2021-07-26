@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scooter_pugachev/pages/register/view/registerForm.dart';
-import 'package:scooter_pugachev/pages/register/view/registerPage.dart';
+import 'package:scooter_pugachev/pages/reg&confirm/register/register.dart';
 
 import 'homeForm.dart';
 

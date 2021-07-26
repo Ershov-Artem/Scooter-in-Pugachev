@@ -1,10 +1,3 @@
-class User {
-  final String phone;
-  final String name;
-
-  User(this.name, this.phone);
-}
-
 class PostUserResponse extends MyResponse {
   String error;
   int statuscode;
@@ -14,6 +7,16 @@ class PostUserResponse extends MyResponse {
   }
 
   PostUserResponse.withError(this.error, this.statuscode);
+}
+
+class ConfirmCodeResponse extends MyResponse {
+  String error;
+  int statuscode;
+  final String token;
+
+  ConfirmCodeResponse(this.token, this.statuscode);
+
+  ConfirmCodeResponse.withError(this.error, this.statuscode) : token = "";
 }
 
 class MyResponse {
