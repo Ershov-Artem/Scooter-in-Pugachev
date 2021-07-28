@@ -65,6 +65,7 @@ class _ConfirmFormState extends State<ConfirmForm> {
                           onChanged: (newValue) {
                             print(_controller.text);
                             _code = newValue;
+                            print(_code);
                             request(_code);
                           },
                         )))
@@ -89,30 +90,30 @@ class _ConfirmFormState extends State<ConfirmForm> {
               ));
         } else if (state == UserStatus.ok) {
           print("all ok, I can't believe");
-          return Container();
+          return Align(alignment: Alignment.center, child: Text("okokokok"));
         } else {
-          return Container(
-              child: Align(
-                  alignment: Alignment.center,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Произошла ошибка ${_response.error}"),
-                        RegButton(
-                            onTap: () => Navigator.pushNamed(context, '/reg'),
-                            height: 55,
-                            width: 230,
-                            text: "Попробовать снова",
-                            decoration: BoxDecoration(
-                                color: Color(0xff8ebbff),
-                                borderRadius: BorderRadius.circular(10)))
-                      ])));
+          return Align(
+              alignment: Alignment.center,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Произошла ошибка ${_response.error}"),
+                    RegButton(
+                        onTap: () => Navigator.pushNamed(context, '/reg'),
+                        height: 55,
+                        width: 230,
+                        text: "Попробовать снова",
+                        decoration: BoxDecoration(
+                            color: Color(0xff8ebbff),
+                            borderRadius: BorderRadius.circular(10)))
+                  ]));
         }
       });
   void request(String str) async {
     if (str.length == 7) {
       str = str.replaceAll(" ", "");
       var _val = int.parse(str);
+      print(_val);
       _response = await _bloc.confUser(_val);
     }
   }

@@ -107,7 +107,7 @@ class _RegFormState extends State<RegForm> {
                         _phoneNumber = _phoneNumber.replaceAll(')', '');
                         _phoneNumber = _phoneNumber.replaceAll('-', '');
                         _phoneNumber = _phoneNumber.replaceAll(' ', '');
-                        _phoneNumber = "${7}${_phoneNumber}";
+                        _phoneNumber = "7" + _phoneNumber;
                         print(_phoneNumber);
                         _response =
                             await _bloc.regUser(_phoneNumber, "НахуйИмя");

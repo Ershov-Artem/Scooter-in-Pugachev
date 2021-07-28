@@ -6,7 +6,7 @@ import '../entities/entities.dart';
 
 class UserApiProvider {
   final Dio _dio = Dio(BaseOptions(
-    baseUrl: "https://scoots.herokuapp.com/",
+    baseUrl: "https://scoots.herokuapp.com/user",
     contentType: "application/json",
   ));
 
@@ -15,7 +15,7 @@ class UserApiProvider {
       "phone": _phone,
       "name": _name,
     };
-    final String url = "user/reg";
+    final String url = "/reg";
     try {
       Response response = await _dio.post(url,
           data: json.encode(params),
@@ -36,7 +36,7 @@ class UserApiProvider {
     var params = {
       "code": _confirmCode,
     };
-    final String url = "user/confirm";
+    final String url = "/confirm";
     try {
       Response response = await _dio.post(url,
           data: json.encode(params),
@@ -44,11 +44,15 @@ class UserApiProvider {
             "Content-Type": "application/json",
             "Accept": "application/json",
           }));
-      if (response.statusCode == 200)
-        return ConfirmCodeResponse(response.data, response.statusCode);
-      else
+      if (response.statusCode == 200) {
+        print("all ok");
+        return ConfirmCodeResponse(
+            response.headers["Token"][0], response.statusCode);
+      } else {
+        print(response.statusCode);
         return ConfirmCodeResponse.withError(
             response.data, response.statusCode);
+      }
     } catch (error, stackTrace) {
       return ConfirmCodeResponse.withError("$error", 0);
     }
