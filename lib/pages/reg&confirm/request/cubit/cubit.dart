@@ -20,19 +20,21 @@ class PostUserBloc extends Cubit<UserStatus> {
       print(response.body);
       emit(UserStatus.error);
     }
-    _subject.sink.add(response);
+    return response;
   }
 
-  confUser(_confirmCode) async {
+  confUser(_confirmCode, _phoneNumber) async {
     emit(UserStatus.loading);
-    ConfirmCodeResponse response = await _repository.confUser(_confirmCode);
+    ConfirmCodeResponse response =
+        await _repository.confUser(_confirmCode, _phoneNumber);
     if (response.statuscode == 200)
       emit(UserStatus.ok);
     else {
       print(response.body);
       emit(UserStatus.error);
     }
-    _subject.sink.add(response);
+    //_subject.sink.add(response);
+    return response;
   }
 
   dispose() {

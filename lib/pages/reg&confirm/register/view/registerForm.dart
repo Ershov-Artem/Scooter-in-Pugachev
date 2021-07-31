@@ -137,7 +137,7 @@ class _RegFormState extends State<RegForm> {
                 ],
               ));
         } else if (state == UserStatus.ok) {
-          return ConfirmPage();
+          return ConfirmPage(_phoneNumber);
         } else {
           return Container(
               child: Align(
@@ -147,7 +147,7 @@ class _RegFormState extends State<RegForm> {
                       children: [
                         Text("Произошла ошибка ${_response.error}"),
                         RegButton(
-                            onTap: () => Navigator.pushNamed(context, '/reg'),
+                            onTap: () => Navigator.pop(context),
                             height: 55,
                             width: 230,
                             text: "Попробовать снова",

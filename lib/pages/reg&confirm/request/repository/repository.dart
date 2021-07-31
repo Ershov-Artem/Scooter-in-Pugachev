@@ -8,7 +8,7 @@ class UserRepository {
     return _apiProvider.regUser(_phone, _name);
   }
 
-  Future<ConfirmCodeResponse> confUser(_confirmCode) {
-    return _apiProvider.confUser(_confirmCode);
+  Future<ConfirmCodeResponse> confUser(_confirmCode, _phoneNumber) {
+    return _apiProvider.confUser(_confirmCode, _phoneNumber);
   }
 }

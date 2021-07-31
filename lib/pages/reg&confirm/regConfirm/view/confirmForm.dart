@@ -6,13 +6,20 @@ import 'package:scooter_pugachev/pages/reg&confirm/request/cubit/cubit.dart';
 import 'package:scooter_pugachev/pages/reg&confirm/request/entities/entities.dart';
 
 class ConfirmForm extends StatefulWidget {
+  final String phoneNumber;
+  ConfirmForm(this.phoneNumber);
+
   //const ConfirmForm({ Key? key }) : super(key: key);
 
   @override
-  _ConfirmFormState createState() => _ConfirmFormState();
+  _ConfirmFormState createState() => _ConfirmFormState(phoneNumber);
 }
 
 class _ConfirmFormState extends State<ConfirmForm> {
+  final String phoneNumber;
+
+  _ConfirmFormState(this.phoneNumber);
+
   PostUserBloc _bloc;
   ConfirmCodeResponse _response;
   String _code;
@@ -99,7 +106,7 @@ class _ConfirmFormState extends State<ConfirmForm> {
                   children: [
                     Text("Произошла ошибка ${_response.error}"),
                     RegButton(
-                        onTap: () => Navigator.pushNamed(context, '/reg'),
+                        onTap: () => Navigator.pop(context),
                         height: 55,
                         width: 230,
                         text: "Попробовать снова",
@@ -113,8 +120,8 @@ class _ConfirmFormState extends State<ConfirmForm> {
     if (str.length == 7) {
       str = str.replaceAll(" ", "");
       var _val = int.parse(str);
-      print(_val);
-      _response = await _bloc.confUser(_val);
+      print("$phoneNumber $_val");
+      _response = await _bloc.confUser(_val, phoneNumber);
     }
   }
 }

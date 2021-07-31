@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:scooter_pugachev/widgets/shared_prefs/sharedPrefs.dart';
 
 import '../entities/entities.dart';
 
@@ -32,9 +33,11 @@ class UserApiProvider {
     }
   }
 
-  Future<ConfirmCodeResponse> confUser(int _confirmCode) async {
+  Future<ConfirmCodeResponse> confUser(
+      int _confirmCode, String _phoneNumber) async {
     var params = {
       "code": _confirmCode,
+      "phone": _phoneNumber,
     };
     final String url = "/confirm";
     try {
@@ -46,10 +49,11 @@ class UserApiProvider {
           }));
       if (response.statusCode == 200) {
         print("all ok");
+        (await prefs).setString('Token', response.headers["Token"][0]);
         return ConfirmCodeResponse(
             response.headers["Token"][0], response.statusCode);
       } else {
-        print(response.statusCode);
+        print("status code ${response.statusCode}");
         return ConfirmCodeResponse.withError(
             response.data, response.statusCode);
       }
