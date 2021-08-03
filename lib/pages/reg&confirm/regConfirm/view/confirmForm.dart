@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
+import 'package:scooter_pugachev/pages/home/home.dart';
 import 'package:scooter_pugachev/pages/reg&confirm/register/widgets/regButton.dart';
 import 'package:scooter_pugachev/pages/reg&confirm/request/cubit/cubit.dart';
 import 'package:scooter_pugachev/pages/reg&confirm/request/entities/entities.dart';
@@ -97,7 +98,7 @@ class _ConfirmFormState extends State<ConfirmForm> {
               ));
         } else if (state == UserStatus.ok) {
           print("all ok, I can't believe");
-          return Align(alignment: Alignment.center, child: Text("okokokok"));
+          return HomePage();
         } else {
           return Align(
               alignment: Alignment.center,
