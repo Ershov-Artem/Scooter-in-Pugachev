@@ -15,7 +15,7 @@ class CheckUserApiProvider {
       response = await _dio.get(url,
           options: Options(headers: {"Authorization": "Bearer $token"}));
       if (response.statusCode == 200) {
-        return CheckUserResponse(response.data);
+        return CheckUserResponse(response.statusCode);
       } else {
         return CheckUserResponse.withError(
             response.data.toString(), response.statusCode);
