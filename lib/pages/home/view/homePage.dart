@@ -12,27 +12,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool _hasToken = false;
+  void _getToken() async {
+    String _token = (await prefs).getString('Token');
+    if (_token != null) {
+      print("Token: $_token");
+      setState(() {
+        _hasToken = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    _getToken();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool _hasToken = false;
-
-    void _getToken() async {
-      String _token = (await prefs).getString('Token');
-      if (_token != null) {
-        print("Token: $_token");
-        setState(() {
-          _hasToken = true;
-        });
-      }
-    }
-
-    initState() {
-      _getToken();
-    }
-
     return Scaffold(
       backgroundColor: Colors.white,
-      body: (_hasToken)
+      body: !(_hasToken)
           ? RegPage()
           : Center(
               child: BlocProvider<CheckUserCubit>(

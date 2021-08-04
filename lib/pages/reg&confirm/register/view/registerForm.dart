@@ -82,6 +82,7 @@ class _RegFormState extends State<RegForm> {
                                     child: Align(
                                         alignment: Alignment.center,
                                         child: TextFormField(
+                                          keyboardType: TextInputType.phone,
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyText1,
@@ -147,7 +148,7 @@ class _RegFormState extends State<RegForm> {
                       children: [
                         Text("Произошла ошибка ${_response.error}"),
                         RegButton(
-                            onTap: () => Navigator.pop(context),
+                            onTap: () => state = UserStatus.initial,
                             height: 55,
                             width: 230,
                             text: "Попробовать снова",

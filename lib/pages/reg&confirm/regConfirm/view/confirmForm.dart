@@ -107,7 +107,7 @@ class _ConfirmFormState extends State<ConfirmForm> {
                   children: [
                     Text("Произошла ошибка ${_response.error}"),
                     RegButton(
-                        onTap: () => Navigator.pop(context),
+                        onTap: () => state = UserStatus.initial,
                         height: 55,
                         width: 230,
                         text: "Попробовать снова",

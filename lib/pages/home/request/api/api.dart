@@ -4,16 +4,19 @@ import 'package:scooter_pugachev/widgets/shared_prefs/sharedPrefs.dart';
 
 class CheckUserApiProvider {
   final Dio _dio = Dio(BaseOptions(
-    baseUrl: "https://scoots.herokuapp.com/user",
-    contentType: "application/json",
-  ));
+      baseUrl: "https://scoots.herokuapp.com",
+      contentType: "application/json",
+      headers: {"Host": "scoots.herokuapp.com"}));
   Future<CheckUserResponse> checkUser() async {
-    String url = "/me";
+    String url = "/user/me";
     Response response;
     String token = (await prefs).getString('Token');
     try {
       response = await _dio.get(url,
-          options: Options(headers: {"Authorization": "Bearer $token"}));
+          options: Options(headers: {
+            "Authorization": "Bearer $token",
+            "Host": "scoots.herokapp.com"
+          }));
       if (response.statusCode == 200) {
         return CheckUserResponse(response.statusCode);
       } else {

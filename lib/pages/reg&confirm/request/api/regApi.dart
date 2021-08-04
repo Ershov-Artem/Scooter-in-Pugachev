@@ -7,16 +7,17 @@ import '../entities/entities.dart';
 
 class UserApiProvider {
   final Dio _dio = Dio(BaseOptions(
-    baseUrl: "https://scoots.herokuapp.com/user",
-    contentType: "application/json",
-  ));
+      baseUrl: "https://scoots.herokuapp.com",
+      contentType: "application/json",
+      headers: {"Host": "scoots.herokuapp.com"}
+     ));
 
   Future<PostUserResponse> regUser(String _phone, String _name) async {
     var params = {
       "phone": _phone,
       "name": _name,
     };
-    final String url = "/reg";
+    final String url = "/user/reg";
     try {
       Response response = await _dio.post(url,
           data: json.encode(params),
@@ -39,7 +40,7 @@ class UserApiProvider {
       "code": _confirmCode,
       "phone": _phoneNumber,
     };
-    final String url = "/confirm";
+    final String url = "/user/confirm";
     try {
       Response response = await _dio.post(url,
           data: json.encode(params),

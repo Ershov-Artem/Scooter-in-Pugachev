@@ -92,7 +92,7 @@ class _HomeFormState extends State<HomeForm> {
                     child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Error occured"),
+                Text("Error occured ${_response.error}"),
               ],
             )));
           }
