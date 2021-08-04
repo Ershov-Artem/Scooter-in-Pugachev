@@ -67,6 +67,7 @@ class _ConfirmFormState extends State<ConfirmForm> {
                     child: Align(
                         alignment: Alignment.center,
                         child: TextFormField(
+                          keyboardType: TextInputType.phone,
                           style: Theme.of(context).textTheme.headline2,
                           textAlign: TextAlign.center,
                           inputFormatters: [MaskedInputFormater("0 0 0 0")],
