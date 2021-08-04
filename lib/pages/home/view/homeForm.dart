@@ -18,6 +18,10 @@ class _HomeFormState extends State<HomeForm> {
   CheckUserCubit _cubit;
   CheckUserResponse _response;
 
+  var zoom = 13.0;
+
+  List<Marker> _markers = [];
+
   @override
   void didChangeDependencies() async {
     _cubit = BlocProvider.of<CheckUserCubit>(context);
@@ -26,10 +30,6 @@ class _HomeFormState extends State<HomeForm> {
 
     super.didChangeDependencies();
   }
-
-  var zoom = 13.0;
-
-  List<Marker> _markers = [];
 
   @override
   Widget build(BuildContext context) {
