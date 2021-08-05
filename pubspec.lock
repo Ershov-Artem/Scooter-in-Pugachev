@@ -117,7 +117,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.0.1"
+    version: "7.1.0"
   flutter_image:
     dependency: transitive
     description:
@@ -302,7 +302,7 @@ packages:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   positioned_tap_detector:
     dependency: transitive
     description:
@@ -316,7 +316,7 @@ packages:
       name: process
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.1"
+    version: "4.2.3"
   proj4dart:
     dependency: transitive
     description:
@@ -337,7 +337,7 @@ packages:
       name: qr_code_scanner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1"
+    version: "0.5.2"
   quiver:
     dependency: transitive
     description:
@@ -480,6 +480,13 @@ packages:
     dependency: transitive
     description:
       name: vector_math
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
+  web_socket_channel:
+    dependency: "direct main"
+    description:
+      name: web_socket_channel
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
