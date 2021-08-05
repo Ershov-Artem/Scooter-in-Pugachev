@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/io.dart';
@@ -64,20 +67,27 @@ class _HomeFormState extends State<HomeForm> {
                 stream: widget.channel.stream,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    _markers.add(
-                      Marker(
+                    json.decode(snapshot.data)?.asMap()?.forEach((key, data) {
+                      _markers.add(Marker(
                         point: LatLng(
-                            double.parse(snapshot.data['coordinate']['x']),
-                            double.parse(snapshot.data['coordinate']['y'])),
-                        builder: (context) => Container(
-                          child: Icon(
-                            Icons.location_on,
-                            color: Theme.of(context).primaryColor,
-                            size: 25,
-                          ),
+                            data['coordinate']['x'], data['coordinate']['y']),
+                        builder: (context) => Align(
+                          alignment: Alignment.center,
+                          child: Stack(children: [
+                            Icon(
+                              Icons.battery_charging_full_rounded,
+                              color: _powerToColor(data['charge']),
+                              size: 10,
+                            ),
+                            Icon(
+                              Icons.electric_scooter_rounded,
+                              color: Theme.of(context).primaryColor,
+                              size: 30,
+                            ),
+                          ]),
                         ),
-                      ),
-                    );
+                      ));
+                    });
                   }
                   return Stack(
                     children: [_buildMap(), _buildCustimButton()],
@@ -138,4 +148,17 @@ class _HomeFormState extends State<HomeForm> {
               ]),
         ),
       ));
+  String _doubleToPower(double a) {
+    a = a * 100;
+    return "$a%";
+  }
+
+  Color _powerToColor(double a) {
+    if (a < 0.25)
+      return Colors.red;
+    else if (a < 0.6)
+      return Colors.orange;
+    else
+      return Colors.green;
+  }
 }
