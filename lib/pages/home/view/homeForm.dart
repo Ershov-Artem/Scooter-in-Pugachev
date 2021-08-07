@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/io.dart';
@@ -72,20 +71,41 @@ class _HomeFormState extends State<HomeForm> {
                         point: LatLng(
                             data['coordinate']['x'], data['coordinate']['y']),
                         builder: (context) => Align(
-                          alignment: Alignment.center,
-                          child: Stack(children: [
-                            Icon(
-                              Icons.battery_charging_full_rounded,
-                              color: _powerToColor(data['charge']),
-                              size: 10,
-                            ),
-                            Icon(
-                              Icons.electric_scooter_rounded,
-                              color: Theme.of(context).primaryColor,
-                              size: 30,
-                            ),
-                          ]),
-                        ),
+                            alignment: Alignment.center,
+                            child: GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (_) => AlertDialog(
+                                          title: Text(
+                                            "Информация о самокате",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline2,
+                                          ),
+                                          content: Container(
+                                              child: Row(
+                                            children: [
+                                              Expanded(
+                                                  child: Text(
+                                                      "Заряд самоката ${_doubleToPower(data['charge'])}"))
+                                            ],
+                                          )),
+                                        ));
+                              },
+                              child: Stack(children: [
+                                Icon(
+                                  Icons.battery_charging_full_rounded,
+                                  color: _powerToColor(data['charge']),
+                                  size: 10,
+                                ),
+                                Icon(
+                                  Icons.electric_scooter_rounded,
+                                  color: Theme.of(context).primaryColor,
+                                  size: 30,
+                                ),
+                              ]),
+                            )),
                       ));
                     });
                   }
@@ -150,7 +170,7 @@ class _HomeFormState extends State<HomeForm> {
       ));
   String _doubleToPower(double a) {
     a = a * 100;
-    return "$a%";
+    return "${a.toInt()}%";
   }
 
   Color _powerToColor(double a) {
