@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'pages/pay/pay.dart';
 
 import 'routes.dart';
-import 'pages/home/view/homePage.dart';
+import 'pages/home/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
           headline2: GoogleFonts.lato(color: Color(0xff424754), fontSize: 25),
         ),
       ),
-      home: HomePage(),
+      //home: HomePage(),
+      home: PayPage(),
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
