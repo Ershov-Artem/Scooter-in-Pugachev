@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'pages/pay/pay.dart';
 
+import 'pages/timer/view/timerPage.dart';
 import 'routes.dart';
 import 'pages/home/home.dart';
 
@@ -13,6 +15,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -29,7 +33,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       //home: HomePage(),
-      home: PayPage(),
+      home: TimerPage(),
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
