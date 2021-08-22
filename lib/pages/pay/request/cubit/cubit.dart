@@ -1,12 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:scooter_pugachev/pages/pay/request/entities/entities.dart';
 import '../repository/repository.dart';
-import 'package:scooter_pugachev/pages/reg&confirm/request/entities/entities.dart';
 
 class PayBloc extends Cubit<PayStatus> {
   final PayRepository _repository = PayRepository();
-  final BehaviorSubject<MyResponse> _subject = BehaviorSubject<MyResponse>();
 
   PayBloc(state) : super(state);
 

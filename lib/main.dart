@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
           bodyText2: GoogleFonts.lato(fontSize: 14, color: Color(0xff424754)),
           headline1: GoogleFonts.lato(color: Colors.white, fontSize: 22),
           headline2: GoogleFonts.lato(color: Color(0xff424754), fontSize: 25),
+          headline3: GoogleFonts.lato(color: Color(0xff424754), fontSize: 55),
         ),
       ),
       //home: HomePage(),
