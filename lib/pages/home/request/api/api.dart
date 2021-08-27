@@ -17,7 +17,8 @@ class CheckUserApiProvider {
             "Authorization": "Bearer $token",
           }));
       if (response.statusCode == 200) {
-        return CheckUserResponse(response.statusCode);
+        return CheckUserResponse(
+            response.statusCode, response.data['startedAt']);
       } else {
         return CheckUserResponse.withError(
             response.data.toString(), response.statusCode);

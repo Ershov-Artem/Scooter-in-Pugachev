@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       //home: HomePage(),
-      home: TimerPage(),
+      home: TimerPage(null),
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

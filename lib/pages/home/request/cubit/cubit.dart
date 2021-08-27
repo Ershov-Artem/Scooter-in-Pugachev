@@ -12,6 +12,9 @@ class CheckUserCubit extends Cubit<CheckStatus> {
     CheckUserResponse response = await _repository.checkUser();
     if (response.statuscode == 200) {
       emit(CheckStatus.ok);
+      if (response.startedAt != null) {
+        emit(CheckStatus.started);
+      }
     } else if (response.statuscode == 401) {
       emit(CheckStatus.need_login);
     } else {
@@ -21,4 +24,4 @@ class CheckUserCubit extends Cubit<CheckStatus> {
   }
 }
 
-enum CheckStatus { loading, error, ok, need_login }
+enum CheckStatus { loading, error, ok, need_login, started }

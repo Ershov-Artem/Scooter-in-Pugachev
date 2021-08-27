@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scooter_pugachev/pages/timer/timer.dart';
 
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/io.dart';
@@ -115,6 +116,8 @@ class _HomeFormState extends State<HomeForm> {
                 });
           } else if (state == CheckStatus.need_login) {
             return RegForm();
+          } else if (state == CheckStatus.started) {
+            return TimerPage(_response.startedAt);
           } else {
             return Container(
                 child: Center(
