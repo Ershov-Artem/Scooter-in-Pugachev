@@ -15,7 +15,7 @@ class PayApiProvider {
       "token": _payToken,
       "id": _scootID,
     };
-    String url = "";
+    String url = "scoots/start";
     Response response;
     String token = (await prefs).getString('Token');
     try {

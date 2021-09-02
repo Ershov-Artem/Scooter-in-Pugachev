@@ -4,9 +4,10 @@ import 'package:scooter_pugachev/widgets/shared_prefs/sharedPrefs.dart';
 
 class CheckUserApiProvider {
   final Dio _dio = Dio(BaseOptions(
-      baseUrl: "https://scoots.herokuapp.com",
-      contentType: "application/json",
-      headers: {"Host": "scoots.herokuapp.com"}));
+    baseUrl: "https://scoots.herokuapp.com",
+    contentType: "application/json",
+    //headers: {"Host": "scoots.herokuapp.com"}
+  ));
   Future<CheckUserResponse> checkUser() async {
     String url = "/user/me";
     Response response;

@@ -3,7 +3,7 @@ import 'package:rxdart/rxdart.dart';
 class CheckUserResponse {
   String error;
   int statuscode;
-  Timestamped startedAt;
+  String startedAt;
 
   CheckUserResponse(this.statuscode, this.startedAt);
 

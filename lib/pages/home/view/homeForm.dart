@@ -153,7 +153,8 @@ class _HomeFormState extends State<HomeForm> {
         child: CustomButton(
           height: 130,
           width: 130,
-          onTap: () => Navigator.of(context).pushNamed('/QRScan'),
+          onTap: () => Navigator.of(context).pushNamed('/pay'),
+          //Navigator.of(context).pushNamed('/QRScan'),
           icon: Icon(
             Icons.qr_code,
             size: 70,

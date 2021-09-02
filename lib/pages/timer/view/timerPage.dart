@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:scooter_pugachev/pages/timer/request/cubit/cubit.dart';
 
 import 'timerForm.dart';
 
 class TimerPage extends StatefulWidget {
-  final Timestamped startedAt;
+  final String startedAt;
 
   TimerPage(this.startedAt);
   @override
@@ -12,12 +14,18 @@ class TimerPage extends StatefulWidget {
 }
 
 class _TimerPageState extends State<TimerPage> {
-  final Timestamped startedAt;
+  final String startedAt;
 
   _TimerPageState(this.startedAt);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: TimerForm(startedAt));
+    return Scaffold(
+        body: Container(
+      child: BlocProvider<PhotoCubit>(
+        create: (BuildContext context) => PhotoCubit(PhotoStatus.loading),
+        child: TimerForm(startedAt),
+      ),
+    ));
   }
 }

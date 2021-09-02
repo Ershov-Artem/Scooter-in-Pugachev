@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
           headline3: GoogleFonts.lato(color: Color(0xff424754), fontSize: 55),
         ),
       ),
-      //home: HomePage(),
-      home: TimerPage(null),
+      home: HomePage(),
+      // home: TimerPage(null),
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

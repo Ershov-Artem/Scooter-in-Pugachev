@@ -110,8 +110,7 @@ class _RegFormState extends State<RegForm> {
                         _phoneNumber = _phoneNumber.replaceAll(' ', '');
                         _phoneNumber = "7" + _phoneNumber;
                         print(_phoneNumber);
-                        _response =
-                            await _bloc.regUser(_phoneNumber, "НахуйИмя");
+                        _response = await _bloc.regUser(_phoneNumber, "");
                       },
                       height: 55,
                       width: 230,
