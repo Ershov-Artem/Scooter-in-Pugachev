@@ -11,6 +11,7 @@ class PayBloc extends Cubit<PayStatus> {
     print("kjkj");
     emit(PayStatus.loading);
     PayResponse response = await _repository.postPayToken(_payToken, _scootID);
+    print("statuscode: ${response.statuscode}  error:  ${response.error}");
     if (response.statuscode == 200) {
       emit(PayStatus.ok);
     } else {

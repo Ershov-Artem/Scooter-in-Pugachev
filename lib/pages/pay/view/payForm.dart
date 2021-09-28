@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,14 +18,16 @@ class _PayFormState extends State<PayForm> {
   PayBloc _bloc;
   PayResponse _response;
 
-  final _paymentItems = [
+  final List<PaymentItem> _paymentItems = [
     PaymentItem(
-      label: 'Total',
-      amount: '500',
+      label: "Total",
+      amount: "500",
+      type: PaymentItemType.total,
       status: PaymentItemStatus.final_price,
-    )
+    ),
   ];
-  Pay _payClient = Pay.withAssets(['gpay.json', 'applepay.json']);
+
+  //Pay _payClient = Pay.withAssets(['gpay.json', 'applepay.json']);
 
   @override
   void didChangeDependencies() async {
@@ -72,21 +72,21 @@ class _PayFormState extends State<PayForm> {
                         style: Theme.of(context).textTheme.bodyText1,
                         textAlign: TextAlign.center,
                       )),
-                  // ApplePayButton(
-                  //   paymentConfigurationAsset: 'applepay.json',
-                  //   paymentItems: _paymentItems,
-                  //   height: 75,
-                  //   width: 275,
-                  //   style: ApplePayButtonStyle.black,
-                  //   type: ApplePayButtonType.buy,
-                  //   margin: const EdgeInsets.only(top: 15.0),
-                  //   onPaymentResult: (data) {
-                  //     print(data);
-                  //   },
-                  //   loadingIndicator: const Center(
-                  //     child: CircularProgressIndicator(),
-                  //   ),
-                  // ),
+                  ApplePayButton(
+                    paymentConfigurationAsset: 'applepay.json',
+                    paymentItems: _paymentItems,
+                    height: 75,
+                    width: 275,
+                    style: ApplePayButtonStyle.black,
+                    type: ApplePayButtonType.buy,
+                    margin: const EdgeInsets.only(top: 15.0),
+                    onPaymentResult: (data) {
+                      print(data);
+                    },
+                    loadingIndicator: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
                   GooglePayButton(
                     height: 75,
                     width: 275,
@@ -99,7 +99,6 @@ class _PayFormState extends State<PayForm> {
                     loadingIndicator: const Center(
                       child: CircularProgressIndicator(),
                     ),
-                    //onPressed: onGooglePayPressed,
                   ),
                 ],
               ));
@@ -120,10 +119,8 @@ class _PayFormState extends State<PayForm> {
                 ],
               ));
         } else if (state == PayStatus.ok) {
-          print("all ok, I can't believe");
           return TimerPage(null);
         } else {
-          print("error with pay: ${_response.error}");
           return Align(
               alignment: Alignment.center,
               child: Column(
@@ -131,7 +128,9 @@ class _PayFormState extends State<PayForm> {
                   children: [
                     Text("Произошла ошибка ${_response.error}"),
                     RegButton(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, "/pay");
+                        },
                         height: 55,
                         width: 230,
                         text: "Попробовать снова",

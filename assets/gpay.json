@@ -7,23 +7,31 @@
   "allowedPaymentMethods": [
     {
       "type": "CARD",
-      "parameters": {
-        "allowedAuthMethods": ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-        "allowedCardNetworks": ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"]
-      },
       "tokenizationSpecification": {
         "type": "PAYMENT_GATEWAY",
         "parameters": {
           "gateway": "example",
-          "gatewayMerchantId": "exampleGatewayMerchantId"
+          "gatewayMerchantId": "gatewayMerchantId"
+        }
+      },
+      "parameters": {
+        "allowedCardNetworks": ["VISA", "MASTERCARD"],
+        "allowedAuthMethods": ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+        "billingAddressRequired": true,
+        "billingAddressParameters": {
+          "format": "FULL",
+          "phoneNumberRequired": true
         }
       }
     }
   ],
+  "merchantInfo": {
+    "merchantId": "01234567890123456789",
+    "merchantName": "Example Merchant Name"
+  },
   "transactionInfo": {
     "currencyCode": "RUB",
-    "countryCode": "RU",
-    "totalPriceStatus": "FINAL"
+    "countryCode": "RU"
   }
 }
 }

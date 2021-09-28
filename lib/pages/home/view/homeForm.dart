@@ -66,7 +66,7 @@ class _HomeFormState extends State<HomeForm> {
             return StreamBuilder(
                 stream: widget.channel.stream,
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
+                  if (snapshot.hasData && state == CheckStatus.ok) {
                     json.decode(snapshot.data)?.asMap()?.forEach((key, data) {
                       _markers.add(Marker(
                         point: LatLng(

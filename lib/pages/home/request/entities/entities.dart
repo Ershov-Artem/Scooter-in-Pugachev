@@ -1,5 +1,3 @@
-import 'package:rxdart/rxdart.dart';
-
 class CheckUserResponse {
   String error;
   int statuscode;
