@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +21,7 @@ class _PayFormState extends State<PayForm> {
   final List<PaymentItem> _paymentItems = [
     PaymentItem(
       label: "Total",
-      amount: "500",
+      amount: "500.0",
       type: PaymentItemType.total,
       status: PaymentItemStatus.final_price,
     ),
@@ -39,17 +37,14 @@ class _PayFormState extends State<PayForm> {
 
   void onGooglePayResult(paymentResult) async {
     print("inside ogpr");
-    print(paymentResult.toString());
+    print(paymentResult.runtimeType);
     print("something goes");
-    // final result = await _payClient.showPaymentSelector(
-    //     provider: PayProvider.google_pay, paymentItems: _paymentItems);
-    // print("result: $result");
-    var _body = (json.decode(
-            paymentResult['paymentMethodData']['tokenizationData']['token']))
-        .toString();
-    _response = await _bloc.postPayToken(_body, 0);
+    print(paymentResult['paymentMethodData']['tokenizationData']['token']);
+    print(paymentResult['paymentMethodData']['tokenizationData']['token']
+        .runtimeType);
+    _response = await _bloc.postPayToken(
+        paymentResult['paymentMethodData']['tokenizationData']['token'], 0);
     print("request goes");
-    print("response: ${_response.statuscode}");
   }
 
   @override

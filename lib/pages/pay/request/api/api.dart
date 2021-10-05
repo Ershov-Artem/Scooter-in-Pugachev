@@ -6,7 +6,7 @@ import 'package:scooter_pugachev/widgets/shared_prefs/sharedPrefs.dart';
 
 class PayApiProvider {
   final Dio _dio = Dio(BaseOptions(
-    baseUrl: "https//scoots.herokuapp.com",
+    baseUrl: "https://scoots.herokuapp.com",
     contentType: "application/json",
   ));
 
