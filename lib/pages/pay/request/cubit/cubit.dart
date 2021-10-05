@@ -7,7 +7,7 @@ class PayBloc extends Cubit<PayStatus> {
 
   PayBloc(state) : super(state);
 
-  postPayToken(_payToken, _scootID) async {
+  postPayToken(String _payToken, int _scootID) async {
     print("kjkj");
     emit(PayStatus.loading);
     PayResponse response = await _repository.postPayToken(_payToken, _scootID);

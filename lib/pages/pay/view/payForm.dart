@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,9 +44,12 @@ class _PayFormState extends State<PayForm> {
     // final result = await _payClient.showPaymentSelector(
     //     provider: PayProvider.google_pay, paymentItems: _paymentItems);
     // print("result: $result");
-    _response = await _bloc.postPayToken(
-        paymentResult['paymentMethodData']['tokenizationData']['token'], 0);
+    var _body = (json.decode(
+            paymentResult['paymentMethodData']['tokenizationData']['token']))
+        .toString();
+    _response = await _bloc.postPayToken(_body, 0);
     print("request goes");
+    print("response: ${_response.statuscode}");
   }
 
   @override
