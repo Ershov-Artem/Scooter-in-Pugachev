@@ -17,13 +17,10 @@ class TimerForm extends StatefulWidget {
 class _TimerFormState extends State<TimerForm> {
   PhotoCubit _cubit;
   Timer _timer;
-  int _start;
   bool _isStoped = false;
   final String startedAt;
 
-  _TimerFormState(this.startedAt) {
-    _start = _timeToInt(startedAt);
-  }
+  _TimerFormState(this.startedAt);
 
   int _timeToInt(String _time) {
     if (_time == null) {
@@ -37,7 +34,7 @@ class _TimerFormState extends State<TimerForm> {
     }
   }
 
-  void startTimer() {
+  void startTimer(int _start) {
     _timer = new Timer.periodic(Duration(seconds: 1), (timer) {
       if (_isStoped) {
         setState(() {
@@ -51,7 +48,7 @@ class _TimerFormState extends State<TimerForm> {
     });
   }
 
-  String _startToTimeString(start) {
+  String _startToTimeString(int start) {
     int _seconds, _minutes;
     _seconds = start % 60;
     _minutes = ((start - _seconds) / 60).floor();
@@ -73,7 +70,7 @@ class _TimerFormState extends State<TimerForm> {
 
   @override
   void initState() {
-    startTimer();
+    startTimer(_timeToInt(startedAt));
     super.initState();
   }
 
@@ -90,6 +87,7 @@ class _TimerFormState extends State<TimerForm> {
       listener: (context, state) async {},
       builder: (context, state) {
         if (state == PhotoStatus.initial) {
+          print("on TimerPage");
           return Align(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +105,7 @@ class _TimerFormState extends State<TimerForm> {
                   width: 275,
                   padding: EdgeInsets.only(bottom: 50),
                   child: Text(
-                    _startToTimeString(_start),
+                    _startToTimeString(_timeToInt(startedAt)),
                     style: Theme.of(context).textTheme.headline3,
                     textAlign: TextAlign.center,
                   )),

@@ -43,7 +43,7 @@ class _PayFormState extends State<PayForm> {
     print(paymentResult['paymentMethodData']['tokenizationData']['token']
         .runtimeType);
     _response = await _bloc.postPayToken(
-        paymentResult['paymentMethodData']['tokenizationData']['token'], 0);
+        paymentResult['paymentMethodData']['tokenizationData']['token'], 2);
     print("request goes");
   }
 
@@ -119,6 +119,7 @@ class _PayFormState extends State<PayForm> {
                 ],
               ));
         } else if (state == PayStatus.ok) {
+          print("goto TimerPage");
           return TimerPage(null);
         } else {
           return Align(

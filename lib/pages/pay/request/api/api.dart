@@ -11,7 +11,7 @@ class PayApiProvider {
   ));
 
   Future<PayResponse> postPayToken(String _payToken, int _scootID) async {
-    var params = {"token": _payToken, "id": _scootID};
+    var params = {"token": _payToken, "id": 1};
     final String url = "/scoots/start";
     String _token = (await prefs).getString('Token');
     try {
