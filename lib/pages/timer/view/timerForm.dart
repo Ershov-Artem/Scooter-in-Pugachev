@@ -152,7 +152,10 @@ class _TimerFormState extends State<TimerForm> {
           ));
         } else if (state == PhotoStatus.ok) {
           print("all ok, statuscode ${_response.statuscode}");
-          return Container();
+          return Align(
+            alignment: Alignment.center,
+            child: Text("Всё получилось ${_response.statuscode}"),
+          );
         } else if (state == PhotoStatus.loading) {
           print("loading");
           return Align(
@@ -172,7 +175,10 @@ class _TimerFormState extends State<TimerForm> {
               ));
         } else {
           print("error ${_response.error}");
-          return Container();
+          return Align(
+            alignment: Alignment.center,
+            child: Text("Произошла ошибка ${_response.error}"),
+          );
         }
       });
 }
