@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:scooter_pugachev/pages/timer/request/entities/entities.dart';
 import '../request/cubit/cubit.dart';
 import '../widgets/widgets.dart';
 
@@ -15,12 +16,16 @@ class TimerForm extends StatefulWidget {
 }
 
 class _TimerFormState extends State<TimerForm> {
+  PhotoResponse _response;
   PhotoCubit _cubit;
   Timer _timer;
+  int _start;
   bool _isStoped = false;
   final String startedAt;
 
-  _TimerFormState(this.startedAt);
+  _TimerFormState(this.startedAt) {
+    _start = _timeToInt(startedAt);
+  }
 
   int _timeToInt(String _time) {
     if (_time == null) {
@@ -34,7 +39,7 @@ class _TimerFormState extends State<TimerForm> {
     }
   }
 
-  void startTimer(int _start) {
+  void startTimer() {
     _timer = new Timer.periodic(Duration(seconds: 1), (timer) {
       if (_isStoped) {
         setState(() {
@@ -70,7 +75,7 @@ class _TimerFormState extends State<TimerForm> {
 
   @override
   void initState() {
-    startTimer(_timeToInt(startedAt));
+    startTimer();
     super.initState();
   }
 
@@ -87,7 +92,6 @@ class _TimerFormState extends State<TimerForm> {
       listener: (context, state) async {},
       builder: (context, state) {
         if (state == PhotoStatus.initial) {
-          print("on TimerPage");
           return Align(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +109,7 @@ class _TimerFormState extends State<TimerForm> {
                   width: 275,
                   padding: EdgeInsets.only(bottom: 50),
                   child: Text(
-                    _startToTimeString(_timeToInt(startedAt)),
+                    _startToTimeString(_start),
                     style: Theme.of(context).textTheme.headline3,
                     textAlign: TextAlign.center,
                   )),
@@ -122,7 +126,10 @@ class _TimerFormState extends State<TimerForm> {
                     final ImagePicker _picker = ImagePicker();
                     final XFile image =
                         await _picker.pickImage(source: ImageSource.camera);
-                    if (image == null) return;
+                    if (image == null) {
+                      state = PhotoStatus.initial;
+                    }
+                    _response = await _cubit.postPhoto(image.path);
                   },
                   icon: Icon(
                     Icons.add_a_photo,
@@ -144,9 +151,10 @@ class _TimerFormState extends State<TimerForm> {
             ],
           ));
         } else if (state == PhotoStatus.ok) {
-          print("all ok");
+          print("all ok, statuscode ${_response.statuscode}");
           return Container();
         } else if (state == PhotoStatus.loading) {
+          print("loading");
           return Align(
               alignment: Alignment.center,
               child: Column(
@@ -163,7 +171,7 @@ class _TimerFormState extends State<TimerForm> {
                 ],
               ));
         } else {
-          print("shit happends");
+          print("error ${_response.error}");
           return Container();
         }
       });

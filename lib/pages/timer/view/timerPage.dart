@@ -22,7 +22,7 @@ class _TimerPageState extends State<TimerPage> {
     return Scaffold(
         body: Container(
       child: BlocProvider<PhotoCubit>(
-        create: (BuildContext context) => PhotoCubit(PhotoStatus.loading),
+        create: (BuildContext context) => PhotoCubit(PhotoStatus.initial),
         child: TimerForm(startedAt),
       ),
     ));

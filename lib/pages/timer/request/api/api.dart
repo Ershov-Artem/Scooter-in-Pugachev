@@ -7,9 +7,8 @@ import 'package:scooter_pugachev/widgets/shared_prefs/sharedPrefs.dart';
 
 class PhotoApiProvider {
   final Dio _dio = Dio(BaseOptions(
-      baseUrl: "https://scoots.herokuapp.com",
-      contentType: "application/json",
-      headers: {"Host": "scoots.herokuapp.com"}));
+    baseUrl: "https://scoots.herokuapp.com",
+  ));
 
   Future<PhotoResponse> postPhoto(String path) async {
     String url = "/scoots/add-photo";
@@ -24,6 +23,7 @@ class PhotoApiProvider {
             "Authorization": "Bearer $token",
             "Content-Type": lookupMimeType(path),
             "Connection": "keep-alive",
+            "Accept": "*/*",
             "Content-Length": demoBytes.length,
           }),
           data: Stream.fromIterable(demoBytes.map((e) => [e])));
