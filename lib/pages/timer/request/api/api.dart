@@ -29,7 +29,7 @@ class PhotoApiProvider {
           data: Stream.fromIterable(demoBytes.map((e) => [e])));
 
       if (response.statusCode == 200) {
-        return PhotoResponse(response.statusCode);
+        return PhotoResponse(response.statusCode, response.data);
       } else {
         return PhotoResponse.withError(
             response.data.toString(), response.statusCode);

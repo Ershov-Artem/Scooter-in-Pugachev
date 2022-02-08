@@ -12,7 +12,7 @@ class FinalPayApiProvider {
 
   Future<FinalPayResponse> postFinalPayToken(String _payToken) async {
     var params = {"token": _payToken};
-    final String url = "/scoots/start";
+    final String url = "/scoots/end";
     String _token = (await prefs).getString('Token');
     try {
       Response response = await _dio.post(

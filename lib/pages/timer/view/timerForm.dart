@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:scooter_pugachev/pages/final/final.dart';
 import 'package:scooter_pugachev/pages/timer/request/entities/entities.dart';
 import '../request/cubit/cubit.dart';
 import '../widgets/widgets.dart';
@@ -152,10 +153,9 @@ class _TimerFormState extends State<TimerForm> {
           ));
         } else if (state == PhotoStatus.ok) {
           print("all ok, statuscode ${_response.statuscode}");
-          return Align(
-            alignment: Alignment.center,
-            child: Text("Всё получилось ${_response.statuscode}"),
-          );
+          print("respoonse ${_response.data.toString()}");
+          print(_response.data['minutes'].toString());
+          return FinalPage(_response.data['minutes']);
         } else if (state == PhotoStatus.loading) {
           print("loading");
           return Align(

@@ -15,20 +15,32 @@ class FinalForm extends StatefulWidget {
 
 class _FinalFormState extends State<FinalForm> {
   int minutes;
-  int price = 7;
+
+  _FinalFormState(this.minutes);
+
   FinalPayBloc _bloc;
   FinalPayResponse _response;
 
-  final List<PaymentItem> _paymentItems = [
-    PaymentItem(
-      label: "Total",
-      amount: "500.0",
-      type: PaymentItemType.total,
-      status: PaymentItemStatus.final_price,
-    ),
-  ];
+  final List<PaymentItem> _paymentItems = [];
 
-  _FinalFormState(this.minutes);
+  void countOfMinutes(int minutes) {
+    int i;
+    for (i = 0; i < minutes; i++) {
+      _paymentItems.add(PaymentItem(
+        label: "Total",
+        amount: "7.0",
+        type: PaymentItemType.item,
+        status: PaymentItemStatus.unknown,
+      ));
+    }
+    print("countOfMinutes...${i}");
+  }
+
+  @override
+  void initState() {
+    countOfMinutes(minutes);
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() async {
